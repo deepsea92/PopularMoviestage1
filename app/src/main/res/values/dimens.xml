@@ -1,0 +1,13 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="tv_movie_detail_size">19sp</dimen>
+    <dimen name="five_dp">5dp</dimen>
+    <dimen name="ten_dp">10dp</dimen>
+    <dimen name="sixteen_dp">16dp</dimen>
+    <dimen name="progress_attr">42dp</dimen>
+    <dimen name="error_image">60dp</dimen>
+    <dimen name="detail_headaing_text">22sp</dimen>
+    <dimen name="twentytwodp">22dp</dimen>
+    <dimen name="image_detail_width">120dp</dimen>
+    <dimen name="image_detail_height">150dp</dimen>
+</resources>

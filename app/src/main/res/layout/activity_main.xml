@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_back"
+    android:padding="@dimen/five_dp"
+
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.sharma.deepak.popularmoviestage1.MainActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_movie_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+    <ProgressBar
+        android:id="@+id/pb_load_back"
+        android:layout_width="@dimen/progress_attr"
+        android:layout_height="@dimen/progress_attr"
+        android:layout_gravity="center"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:id="@+id/ll_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <ImageView
+            android:layout_width="@dimen/error_image"
+            android:layout_height="@dimen/error_image"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/error" />
+
+        <TextView
+            android:id="@+id/tv_error_happened"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/five_dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/error_string"
+            android:textSize="@dimen/tv_movie_detail_size"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</FrameLayout>
