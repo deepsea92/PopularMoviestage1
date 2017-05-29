@@ -18,7 +18,7 @@ import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 public class NetworkConnection {
     private static final String BASE_URL = "http://api.themoviedb.org/3/movie/";
-    private static final String API_KEY = "";
+    private static final String API_KEY = "b27eb13363d494dea756f2639056df68";
     private static final String API_PARAM = "api_key";
 
     public static URL buildUrl(String preference) {

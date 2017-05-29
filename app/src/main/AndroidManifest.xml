@@ -29,6 +29,10 @@
                 android:value=".MainActivity" />
 
         </activity>
+
+        <service
+            android:name=".service.DataSendingService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

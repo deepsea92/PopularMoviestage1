@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -43,7 +44,7 @@
                         android:fontFamily="sans-serif-condensed"
                         android:maxLines="1"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/tv_movie_detail_size"
+                        android:textSize="@dimen/tv_detail_heading_size"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -67,7 +68,7 @@
                             android:fontFamily="sans-serif-condensed"
                             android:maxLines="1"
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/tv_movie_detail_size" />
+                            android:textSize="@dimen/tv_detail_heading_size" />
                     </LinearLayout>
 
                     <TextView
@@ -78,7 +79,7 @@
                         android:ellipsize="end"
                         android:fontFamily="sans-serif-condensed"
                         android:maxLines="1"
-                        android:textSize="@dimen/tv_movie_detail_size" />
+                        android:textSize="@dimen/tv_detail_heading_size" />
 
                     <TextView
                         android:id="@+id/tv_language"
@@ -87,7 +88,7 @@
                         android:ellipsize="end"
                         android:fontFamily="sans-serif-condensed"
                         android:maxLines="1"
-                        android:textSize="@dimen/tv_movie_detail_size" />
+                        android:textSize="@dimen/tv_detail_heading_size" />
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -96,7 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/ten_dp"
-            android:layout_marginTop="@dimen/twentytwodp"
+
             card_view:cardUseCompatPadding="true">
 
             <LinearLayout
@@ -111,7 +112,7 @@
                     android:fontFamily="sans-serif-condensed"
                     android:text="@string/synopsis"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/tv_movie_detail_size"
+                    android:textSize="@dimen/tv_detail_heading_size"
                     android:textStyle="bold" />
 
                 <TextView
@@ -120,9 +121,64 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/five_dp"
                     android:fontFamily="sans-serif-condensed"
-                    android:textSize="@dimen/tv_movie_detail_size" />
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/tv_detail_size" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/ten_dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/movie_trailers"
+            android:textColor="@color/movie_trailer_text_color"
+            android:textSize="@dimen/tv_detail_heading_size"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/pb_trailer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_trailer_list"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="horizontal"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"></android.support.v7.widget.RecyclerView>
+        </FrameLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/ten_dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/reviews"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/tv_detail_heading_size"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/pb_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_review_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+        </FrameLayout>
     </LinearLayout>
-</ScrollView>
+</android.support.v4.widget.NestedScrollView>

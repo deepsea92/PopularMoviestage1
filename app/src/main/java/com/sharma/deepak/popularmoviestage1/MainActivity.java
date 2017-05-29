@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements MovieListAdapter.MovieItemClickInterface {
+public class MainActivity extends AppCompatActivity implements MovieListAdapter.movieItemClickInterface {
     private RecyclerView mMovieRecyclerView;
     private ProgressBar mProgressBar;
     private LinearLayout mErrorLinearLayout;
@@ -46,8 +46,6 @@ public class MainActivity extends AppCompatActivity implements MovieListAdapter.
 
     // Method to initialise the ui components and adapters.
     private void initView() {
-
-
         mMovieRecyclerView = (RecyclerView) findViewById(R.id.rv_movie_list);
         mProgressBar = (ProgressBar) findViewById(R.id.pb_load_back);
         mErrorLinearLayout = (LinearLayout) findViewById(R.id.ll_error);

@@ -21,9 +21,9 @@ import java.util.ArrayList;
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieHolderPattern> {
     private ArrayList<Movie> movieListDetails;
     private Context context;
-    MovieItemClickInterface movieInterface;
+    movieItemClickInterface movieInterface;
 
-    public MovieListAdapter(ArrayList<Movie> movieListDetails, Context context, MovieItemClickInterface movieInterface) {
+    public MovieListAdapter(ArrayList<Movie> movieListDetails, Context context, movieItemClickInterface movieInterface) {
         this.context = context;
         this.movieListDetails = movieListDetails;
         this.movieInterface = movieInterface;
@@ -78,7 +78,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     }
 
 
-    public interface MovieItemClickInterface {
+    public interface movieItemClickInterface {
         public void movieClick(int position);
     }
 }

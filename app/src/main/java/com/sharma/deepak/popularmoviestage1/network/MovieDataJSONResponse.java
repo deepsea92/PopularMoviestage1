@@ -22,6 +22,7 @@ public class MovieDataJSONResponse {
             JSONArray resultArray = rootObject.getJSONArray("results");
             for (int i = 0; i < resultArray.length(); i++) {
                 JSONObject jsonMovieObject = resultArray.getJSONObject(i);
+                String id = jsonMovieObject.getString("id");
                 String poster_path = jsonMovieObject.getString("poster_path");
                 String release_date = jsonMovieObject.getString("release_date");
                 String original_title = jsonMovieObject.getString("original_title");
@@ -29,8 +30,8 @@ public class MovieDataJSONResponse {
                 int vote_count = jsonMovieObject.getInt("vote_count");
                 String original_language = jsonMovieObject.getString("original_language");
                 String overview = jsonMovieObject.getString("overview");
-
-                Movie movieDataObject = new Movie(original_title, poster_path, overview, release_date, original_language, vote_average, vote_count);
+                String backdrop_path = jsonMovieObject.getString("backdrop_path");
+                Movie movieDataObject = new Movie(id, original_title, poster_path, overview, release_date, original_language, vote_average, vote_count, backdrop_path);
                 movieList.add(movieDataObject);
             }
         } catch (JSONException e) {
