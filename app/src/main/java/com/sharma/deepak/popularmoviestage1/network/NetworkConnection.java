@@ -39,6 +39,25 @@ public class NetworkConnection {
         return url;
     }
 
+    public static URL videoOrReviewUrl(String preference, String movieId) {
+        Uri builtUri = Uri.parse(BASE_URL).buildUpon()
+                .appendPath(movieId)
+                .appendPath(preference)
+                .appendQueryParameter(API_PARAM, API_KEY)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        Log.v(TAG, "Video or Review URI " + url);
+
+        return url;
+    }
+
 
     public static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();

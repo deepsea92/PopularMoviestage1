@@ -47,6 +47,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         Glide
                 .with(context)
                 .load(movie.getImageThumbnail())
+                .error(R.drawable.movie_error)
                 .centerCrop()
                 .crossFade()
                 .placeholder(R.drawable.movie_default)

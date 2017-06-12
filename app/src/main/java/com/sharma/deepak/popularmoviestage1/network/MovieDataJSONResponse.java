@@ -1,6 +1,8 @@
 package com.sharma.deepak.popularmoviestage1.network;
 
 import com.sharma.deepak.popularmoviestage1.bean.Movie;
+import com.sharma.deepak.popularmoviestage1.bean.Reviews;
+import com.sharma.deepak.popularmoviestage1.bean.Trailer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,5 +43,51 @@ public class MovieDataJSONResponse {
         return movieList;
     }
 
+    public static ArrayList<Reviews> reviewData(String jsonData) {
+        ArrayList<Reviews> reviewList = new ArrayList<Reviews>();
+
+
+        try {
+            JSONObject rootObject = new JSONObject(jsonData);
+            JSONArray reviewArray = rootObject.getJSONArray("results");
+
+            for (int i = 0; i < reviewArray.length(); i++) {
+                JSONObject reviewJSONObject = reviewArray.getJSONObject(i);
+                String author = reviewJSONObject.getString("author");
+                String content = reviewJSONObject.getString("content");
+
+                Reviews review = new Reviews(author, content);
+                reviewList.add(review);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return reviewList;
+    }
+
+    public static ArrayList<Trailer> trailerData(String jsonData) {
+        ArrayList<Trailer> trailerList = new ArrayList<Trailer>();
+
+
+        try {
+            JSONObject rootObject = new JSONObject(jsonData);
+            JSONArray trailerJSONArray = rootObject.getJSONArray("results");
+
+            for (int i = 0; i < trailerJSONArray.length(); i++) {
+                JSONObject trailerJSONObject = trailerJSONArray.getJSONObject(i);
+                String key = trailerJSONObject.getString("key");
+                String type = trailerJSONObject.getString("type");
+                String name = trailerJSONObject.getString("name");
+
+                Trailer trailer = new Trailer(key, type, name);
+                trailerList.add(trailer);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return trailerList;
+    }
 
 }

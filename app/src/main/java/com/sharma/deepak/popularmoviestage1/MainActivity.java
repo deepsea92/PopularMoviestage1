@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements MovieListAdapter.
     private static final String POPULAR_PARAM = "popular";
     private static final String TOP_RATED_PARAM = "top_rated";
     private GridLayoutManager gridLayout;
-    ArrayList<Movie> movieListData;
+    private ArrayList<Movie> movieListData;
     static final String MOVIE_DATA_PASSED_KEY = "moviePassedData";
 
     @Override
