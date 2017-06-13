@@ -18,6 +18,9 @@ import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 public class NetworkConnection {
     private static final String BASE_URL = "http://api.themoviedb.org/3/movie/";
+    private static final String YOUTUBE_URL = "https://www.youtube.com/";
+    private static final String YOUTUBE_WATCH = "watch";
+    private static final String YOUTUBE_PARAM = "v";
     private static final String API_KEY = "b27eb13363d494dea756f2639056df68";
     private static final String API_PARAM = "api_key";
 
@@ -58,6 +61,24 @@ public class NetworkConnection {
         return url;
     }
 
+    public static URL youtubeUrl(String videoId) {
+        Uri builtUri = Uri.parse(YOUTUBE_URL).buildUpon()
+                .appendPath(YOUTUBE_WATCH)
+                .appendQueryParameter(YOUTUBE_PARAM, videoId)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        Log.v(TAG, "Video or Review URI " + url);
+
+        return url;
+    }
+
 
     public static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -79,3 +100,4 @@ public class NetworkConnection {
     }
 
 }
+

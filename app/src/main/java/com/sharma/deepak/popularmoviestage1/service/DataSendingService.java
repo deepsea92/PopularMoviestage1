@@ -18,6 +18,7 @@ import java.io.IOException;
 public class DataSendingService extends IntentService {
     public static final String REVIEW_JSON = "review_json";
     public static final String TRAILER_JSON = "trailer_json";
+    public static final String MOVIE_ID_EXTRA = "movieId";
 
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
@@ -35,14 +36,14 @@ public class DataSendingService extends IntentService {
     public static void dataService(Context context, String action, String movieId) {
         Intent dataIntent = new Intent(context, DataSendingService.class);
         dataIntent.setAction(action);
-        dataIntent.putExtra("movieId", movieId);
+        dataIntent.putExtra(MOVIE_ID_EXTRA, movieId);
         context.startService(dataIntent);
     }
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         Log.e("intent service", intent.getAction());
-        String movieId = intent.getStringExtra("movieId");
+        String movieId = intent.getStringExtra(MOVIE_ID_EXTRA);
         switch (intent.getAction()) {
             case DetailActivity.ACTION_REVIEWS:
                 String reviewJSONString = null;

@@ -6,4 +6,5 @@
     <color name="app_back">#E0e0e0</color>
     <color name="movie_trailer_text_color">#3F51B5</color>
     <color name="review_heading">#E91E63</color>
+    <color name="review_author_color">#009688</color>
 </resources>

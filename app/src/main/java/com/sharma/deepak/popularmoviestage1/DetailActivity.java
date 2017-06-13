@@ -1,14 +1,18 @@
 package com.sharma.deepak.popularmoviestage1;
 
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -21,6 +25,7 @@ import com.sharma.deepak.popularmoviestage1.bean.Movie;
 import com.sharma.deepak.popularmoviestage1.bean.Reviews;
 import com.sharma.deepak.popularmoviestage1.bean.Trailer;
 import com.sharma.deepak.popularmoviestage1.network.MovieDataJSONResponse;
+import com.sharma.deepak.popularmoviestage1.network.NetworkConnection;
 import com.sharma.deepak.popularmoviestage1.service.DataSendingService;
 
 import java.util.ArrayList;
@@ -35,6 +40,10 @@ public class DetailActivity extends AppCompatActivity implements TrailerAdapter.
 
     private RecyclerView mRvReviewList, mRvTrailerList;
     private ProgressBar mPbReview, mPbTrailer;
+    private TextView mTvNoReview, mTvNoTrailer;
+    private String imagePath;
+    ArrayList<Trailer> trailerArrayList;
+    private boolean favouriteFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +68,7 @@ public class DetailActivity extends AppCompatActivity implements TrailerAdapter.
         String language = movie.getLanguage();
         String overView = movie.getOverview();
         String releaseDate = movie.getReleaseDate();
-        String imagePath = movie.getImageThumbnail();
-        String movieId = movie.getId();
+        imagePath = movie.getImageThumbnail();
         Log.e("Movie path", imagePath);
 
         double rating = movie.getVoteAverage();
@@ -91,6 +99,8 @@ public class DetailActivity extends AppCompatActivity implements TrailerAdapter.
         mMovieReleaseDateTextView = (TextView) findViewById(R.id.tv_release_date);
         mUserRatingTextView = (TextView) findViewById(R.id.tv_rating_description);
         mOverViewTextView = (TextView) findViewById(R.id.tv_overview);
+        mTvNoReview = (TextView) findViewById(R.id.tv_no_review);
+        mTvNoTrailer = (TextView) findViewById(R.id.tv_no_trailer);
 
         mRvReviewList = (RecyclerView) findViewById(R.id.rv_review_list);
         mRvTrailerList = (RecyclerView) findViewById(R.id.rv_trailer_list);
@@ -134,28 +144,72 @@ public class DetailActivity extends AppCompatActivity implements TrailerAdapter.
         mPbReview.setVisibility(View.INVISIBLE);
         ArrayList<Reviews> reviewsArrayList = MovieDataJSONResponse.reviewData(reviewJSONString);
 
-        LinearLayoutManager reviewLinearLayoutManager = new LinearLayoutManager(this);
-        mRvReviewList.setHasFixedSize(true);
-        mRvReviewList.setLayoutManager(reviewLinearLayoutManager);
-        ReviewAdapter reviewAdapter = new ReviewAdapter(reviewsArrayList, this);
-        mRvReviewList.setAdapter(reviewAdapter);
-
+        if (reviewsArrayList.size() <= 0) {
+            mTvNoReview.setVisibility(View.VISIBLE);
+        } else {
+            LinearLayoutManager reviewLinearLayoutManager = new LinearLayoutManager(this);
+            mRvReviewList.setHasFixedSize(true);
+            mRvReviewList.setLayoutManager(reviewLinearLayoutManager);
+            ReviewAdapter reviewAdapter = new ReviewAdapter(reviewsArrayList, this);
+            mRvReviewList.setAdapter(reviewAdapter);
+        }
     }
 
     private void setUpTrailerData(String trailerJSONString) {
         Log.e("broadcast", "trailer broadcast received");
         mPbTrailer.setVisibility(View.INVISIBLE);
-        ArrayList<Trailer> trailerArrayList = MovieDataJSONResponse.trailerData(trailerJSONString);
+        trailerArrayList = MovieDataJSONResponse.trailerData(trailerJSONString);
 
-        LinearLayoutManager trailerLinearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
-        mRvTrailerList.setHasFixedSize(true);
-        mRvTrailerList.setLayoutManager(trailerLinearLayoutManager);
-        TrailerAdapter trailerAdapter = new TrailerAdapter(trailerArrayList, this, this);
-        mRvTrailerList.setAdapter(trailerAdapter);
+        if (trailerArrayList.size() <= 0) {
+            mTvNoTrailer.setVisibility(View.VISIBLE);
+        } else {
+            LinearLayoutManager trailerLinearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+            mRvTrailerList.setHasFixedSize(true);
+            mRvTrailerList.setLayoutManager(trailerLinearLayoutManager);
+            TrailerAdapter trailerAdapter = new TrailerAdapter(trailerArrayList, this, this, imagePath);
+            mRvTrailerList.setAdapter(trailerAdapter);
+        }
     }
 
     @Override
     public void trailerClick(int position) {
+        String youtubeURL = NetworkConnection.youtubeUrl(trailerArrayList.get(position).getKey()).toString();
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeURL));
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
 
+        } catch (ActivityNotFoundException e) {
+            // youtube is not installed.Will be opened in other available apps
+            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeURL));
+            startActivity(i);
+        }
+
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.detail_activity_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_favourite:
+
+                if (favouriteFlag) {
+                    item.setIcon(R.drawable.star_filled);
+                    favouriteFlag = false;
+                } else {
+                    item.setIcon(R.drawable.star);
+                    favouriteFlag = true;
+                }
+                return true;
+
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

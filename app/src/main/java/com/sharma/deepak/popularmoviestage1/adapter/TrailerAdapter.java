@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.sharma.deepak.popularmoviestage1.R;
 import com.sharma.deepak.popularmoviestage1.bean.Trailer;
 
@@ -21,12 +22,14 @@ import java.util.ArrayList;
 public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.TrailerHolderPattern> {
     private ArrayList<Trailer> trailerArrayList;
     private Context context;
+    private String imagePath;
     TrailerItemClickInterface trailerInterface;
 
-    public TrailerAdapter(ArrayList<Trailer> trailerArrayList, Context context, TrailerItemClickInterface trailerInterface) {
+    public TrailerAdapter(ArrayList<Trailer> trailerArrayList, Context context, TrailerItemClickInterface trailerInterface, String imagePath) {
         this.context = context;
         this.trailerArrayList = trailerArrayList;
         this.trailerInterface = trailerInterface;
+        this.imagePath = imagePath;
     }
 
     @Override
@@ -40,18 +43,17 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.TrailerH
     @Override
     public void onBindViewHolder(TrailerHolderPattern holder, int position) {
         Trailer trailer = trailerArrayList.get(position);
-        holder.trailerType.setText(trailer.getType());
+        //  holder.trailerType.setText(trailer.getType());
         holder.trailerName.setText(trailer.getName());
-        Log.e("type",trailer.getType());
-        Log.e("name",trailer.getName());
-        /*Glide
+        Log.e("type", trailer.getType());
+        Log.e("name", trailer.getName());
+        Glide
                 .with(context)
-                .load(movie.getImageThumbnail())
-                .error(R.drawable.movie_error)
+                .load(imagePath)
                 .centerCrop()
                 .crossFade()
                 .placeholder(R.drawable.movie_default)
-                .into(holder.trailerImage);*/
+                .into(holder.trailerImage);
     }
 
     @Override
@@ -66,7 +68,7 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.TrailerH
         public TrailerHolderPattern(View itemView) {
             super(itemView);
             trailerImage = (ImageView) itemView.findViewById(R.id.iv_trailer_item);
-            trailerType = (TextView) itemView.findViewById(R.id.tv_trailer_type);
+            //trailerType = (TextView) itemView.findViewById(R.id.tv_trailer_type);
             trailerName = (TextView) itemView.findViewById(R.id.tv_trailer_name);
             itemView.setOnClickListener(this);
         }
@@ -83,4 +85,5 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.TrailerH
         public void trailerClick(int position);
     }
 }
+
 

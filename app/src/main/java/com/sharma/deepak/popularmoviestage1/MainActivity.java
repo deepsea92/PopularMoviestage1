@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements MovieListAdapter.
     private GridLayoutManager gridLayout;
     private ArrayList<Movie> movieListData;
     static final String MOVIE_DATA_PASSED_KEY = "moviePassedData";
+    static final String ACTION_LOAD_MOVIES = "load_movies";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

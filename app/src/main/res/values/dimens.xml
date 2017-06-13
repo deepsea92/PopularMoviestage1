@@ -11,4 +11,5 @@
     <dimen name="image_detail_width">120dp</dimen>
     <dimen name="image_detail_height">150dp</dimen>
     <dimen name="tv_detail_size">18sp</dimen>
+    <dimen name="review_text_size">17sp</dimen>
 </resources>

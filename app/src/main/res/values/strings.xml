@@ -10,4 +10,5 @@
     <string name="synopsis">Synopsis</string>
     <string name="movie_trailers">Trailers</string>
     <string name="reviews">Reviews</string>
+    <string name="action_favourite">Favourite</string>
 </resources>

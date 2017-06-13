@@ -138,8 +138,17 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_no_trailer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text=" 'No Trailer Available for this movie' "
+                android:textColor="@android:color/black"
+                android:textStyle="italic"
+                android:visibility="invisible" />
 
             <ProgressBar
                 android:id="@+id/pb_trailer"
@@ -168,8 +177,17 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_no_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text=" 'No review given to this movie' "
+                android:textColor="@android:color/black"
+                android:textStyle="italic"
+                android:visibility="invisible" />
 
             <ProgressBar
                 android:id="@+id/pb_review"
@@ -180,6 +198,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_review_list"
                 android:layout_width="match_parent"
+                android:nestedScrollingEnabled="false"
                 android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
         </FrameLayout>
     </LinearLayout>
